@@ -15,6 +15,7 @@
     <%= form.label :order_no %>
     <%= form.number_field :order_no, :value => "#{rand(10..1000)}",:readonly => true, class: 'form-control' %>
   </div>
+
   <div class="field">
     <%= form.label :order_type %>
     <%= form.text_field :order_type %>
@@ -33,7 +34,7 @@
   <div class="form-group">
     <%= form.hidden_field :user_id, :value=>current_user.id %>
   </div>
-  
+
   <%=form.fields_for :order_products do |f|%>
     <div class="field">
       <%= f.label :qty %>
@@ -42,9 +43,47 @@
 
     <div class="field">
       <%= f.label :product_id %>
-      <%= f.text_field :product_id %>
+      <%= f.select :product_id, options_for_select(Product.all.collect{|a| [a.name, a.id]})%>
     </div>
   <% end %>
+
+  <%=form.fields_for :addresses do |add|%>
+    <div class="field">
+      <%= add.label :addresstype %>
+      <%= add.select :addresstype, options_for_select(["Billing Address", "Shipping Address"])%>
+    </div>
+
+    <div class="field">
+      <%= add.label :line1 %>
+      <%= add.text_field :line1 %>
+    </div>
+    
+    <div class="field">
+      <%= add.label :line2 %>
+      <%= add.text_field :line2 %>
+    </div>
+
+    <div class="field">
+      <%= add.label :street %>
+      <%= add.text_field :street %>
+    </div>
+
+    <div class="field">
+      <%= add.label :landmark %>
+      <%= add.text_field :landmark %>
+    </div>
+
+    <div class="field">
+      <%= add.label :city %>
+      <%= add.text_field :city %>
+    </div>
+
+    <div class="field">
+      <%= add.label :state %>
+      <%= add.text_field :state %>
+    </div>
+    
+    <%end %>
 
   <div class="actions">
     <%= form.submit %>
