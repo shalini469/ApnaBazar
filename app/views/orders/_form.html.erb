@@ -52,7 +52,11 @@
       <%= add.label :addresstype %>
       <%= add.select :addresstype, options_for_select(["Billing Address", "Shipping Address"])%>
     </div>
-    <%end %>
+  <%end %> 
+
+  <div class="form-actions">
+    <%= link_to_add_fields "Add product", form, :order_products %>
+  </div>
 
   <div class="actions">
     <%= form.submit %>
